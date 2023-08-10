@@ -1,0 +1,166 @@
+swagger: "2.0"
+info:
+  title: "E-Wallet "
+  description: "Provided basic API."
+  version: "1.0.0"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+host: "localhost:8080"
+basePath: "/"
+schemes:
+  - http
+  - https
+tags:
+  - name: "ADMIN"
+    description: "API for ADMIN role"
+  - name: "USER"
+    description: "API for USER role"
+  - name: "AUTH"
+
+paths:
+  /auth:
+    post:
+      tags:
+        - "AUTH"
+      summary: "Get user by name"
+      description: "Get user using name as parameter"
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        "200":
+          description: OK
+          headers:
+            token-header:
+              type: string
+              description: auth token
+              default: 3aa61d52-47ce-4ab3-8fbf-fa7a38539a18
+          schema:
+            $ref: '#/definitions/User'
+        "404":
+          description: User not found
+          schema:
+            $ref: '#/definitions/UserNotFound'
+          headers:
+            token-header:
+              type: string
+              default: null
+      parameters:
+        - in: body
+          name: "Auth parameters"
+          description: "Username and password"
+          required: true
+          schema:
+            $ref: '#/definitions/Auth'
+  /user/save:
+    post:
+      tags:
+        - "USER"
+      summary: ""
+      description: ""
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: '#/definitions/User'
+      parameters:
+        - in: body
+          name: user
+          description: "User"
+          schema:
+            $ref: '#/definitions/User'
+  /user/{name}:
+    get:
+      tags:
+        - "USER"
+      summary: "Get user by name"
+      description: "Get user using name as parameter"
+      responses:
+        "200":
+          description: OK
+          headers:
+            token-header:
+              type: string
+              description: auth token
+          schema:
+            $ref: '#/definitions/User'
+        "404":
+          description: User not found
+          schema:
+            $ref: '#/definitions/UserNotFound'
+      parameters:
+        - in: header
+          name: token
+          type: string
+          format: uuid
+          description: User token
+          required: true
+        - in: path
+          name: "name"
+          description: "Incoming parameter"
+          required: true
+          schema:
+            type: string
+            description: "User name"
+  /user/getBy:
+    get:
+      tags:
+        - "USER"
+      summary:
+      description:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+      parameters:
+        - in: query
+          name: role
+          type: string
+          default: ADMIN
+          required: true
+
+securityDefinitions:
+  BasicAuth:
+    type: basic
+security:
+  - BasicAuth: []
+
+definitions:
+  User:
+    type: object
+    required:
+      - name
+      - role
+      - pass
+    properties:
+      name:
+        type: string
+      role:
+        type: string
+      pass:
+        type: string
+
+  UserNotFound:
+    type: object
+    properties:
+      error:
+        type: string
+
+  Auth:
+    type: object
+    properties:
+      name:
+        type: string
+        default: Dima
+      pass:
+        type: string
+        default: Kovteba
+
+
+
+

@@ -1,0 +1,80 @@
+                #tags:
+#  - name: "Customer"
+#    description: "Get customer by id"
+#  - name: "Request rate"
+#    description: "Request rate from open api"
+#  - name: "Find rate"
+#    description: "Find rate in DB"
+#  - name: "Admin only"
+#    description: "API opened only for admin"
+#  - name: "User only"
+#    description: "API opened only for user"
+#
+#paths:
+#  /customer/{customerId}:
+#    get:
+#      tags:
+#        - "Customer"
+#      summary: ""
+#      description: ""
+#      responses:
+#        "200":
+#          description: "Should return customer information"
+#      parameters:
+#        - in: "path"
+#          name: "customerId"
+#          required: true
+#          schema:
+#            type: string
+#          description: "Customer id"
+#  /rate/request/{date}:
+#    get:
+#      tags:
+#        - "Request rate"
+#      summary: ""
+#      description: ""
+#      responses:
+#        "200":
+#          description: "Return requested rate"
+#      parameters:
+#        - in: "path"
+#          name: "date"
+#          required: true
+#          schema:
+#            type: string
+#          description: "Date"
+#  /rate/{date}:
+#    get:
+#      tags:
+#        - "Find rate"
+#      summary: ""
+#      description: ""
+#      responses:
+#        "200":
+#          description: "Return requested rate"
+#      parameters:
+#        - in: "path"
+#          name: "date"
+#          required: true
+#          schema:
+#            type: string
+#          description: "Date"
+#
+#  /test/open-for-admin-only:
+#    get:
+#      tags:
+#        - "Admin only"
+#      summary: ""
+#      description: ""
+#      responses:
+#        "200":
+#          description: "Access have only customer with role = ADMIN"
+#  /test/open-for-user-only:
+#    get:
+#      tags:
+#        - "User only"
+#      summary: ""
+#      description: ""
+#      responses:
+#        "200":
+#          description: "Access have only customer with role = USER"
